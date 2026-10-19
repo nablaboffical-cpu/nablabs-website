@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NabLabs website
 
-## Getting Started
+Landing page for NabLabs, an AI solutions and full-stack web development agency.
+Built with Next.js, TypeScript and Tailwind CSS.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Edit the content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Almost all text, pricing and links live in one file: `src/config/site.ts`.
+Change prices in the `aiPlans` and `webPlans` lists. Every price is shown as a starting price in USD.
 
-## Learn More
+## Booking (Calendly)
 
-To learn more about Next.js, take a look at the following resources:
+All "Book a Call" buttons open one shared popup, defined in `src/components/BookingProvider.tsx`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_CALENDLY_URL` to your Calendly event link.
+2. On Vercel, open Project, Settings, Environment Variables, add `NEXT_PUBLIC_CALENDLY_URL`, then redeploy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If the variable is missing or still contains the placeholder, the popup shows setup instructions instead of a calendar.
 
-## Deploy on Vercel
+## Optional settings
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_LINKEDIN_URL`, `NEXT_PUBLIC_INSTAGRAM_URL`, `NEXT_PUBLIC_X_URL` and `NEXT_PUBLIC_SITE_URL`.
+Leave them empty until real values exist. The site hides empty links and does not invent any.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Checks
+
+```bash
+npx tsc --noEmit
+npm run lint
+npm run build
+```
+
+## Deploy
+
+Push to the `main` branch on GitHub. Vercel builds every push automatically.
+Pushes to `main` become production deployments. Other branches get preview deployments.
